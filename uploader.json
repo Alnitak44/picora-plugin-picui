@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 2,
+  "requires": [
+    "response-conditions"
+  ],
+  "permissions": {
+    "network": [
+      "picui.cn"
+    ],
+    "readSelectedFile": true,
+    "allowInsecureHttp": false
+  },
+  "config": [
+    {
+      "key": "authorization",
+      "label": "授权信息（可选）",
+      "type": "secret",
+      "required": false,
+      "hint": "游客上传请留空；账户上传填 Bearer 加空格和个人 Token"
+    }
+  ],
+  "upload": {
+    "method": "POST",
+    "url": "https://picui.cn/api/v1/upload",
+    "headers": {
+      "Authorization": "${config.authorization}",
+      "Accept": "application/json"
+    },
+    "body": {
+      "type": "multipart",
+      "fileField": "file"
+    },
+    "response": {
+      "url": "data.links.url",
+      "thumbnail": "data.links.thumbnail_url",
+      "successStatuses": [
+        200,
+        201
+      ],
+      "success": {
+        "path": "status",
+        "equals": true
+      },
+      "errorMessage": "message"
+    },
+    "followRedirects": false,
+    "timeoutSeconds": 120,
+    "errors": {
+      "400": "图片或上传请求不符合 PICUI 要求。",
+      "401": "授权失败，请检查 Bearer Token 是否正确。",
+      "403": "PICUI 拒绝上传，请检查账户权限或游客上传是否开放。",
+      "413": "图片超过 PICUI 允许的大小。",
+      "422": "图片或上传参数未通过 PICUI 校验。",
+      "429": "上传过于频繁，请稍后重试。",
+      "500": "PICUI 服务异常，请稍后重试。",
+      "502": "PICUI 网关异常，请稍后重试。",
+      "503": "PICUI 暂不可用，请稍后重试。"
+    }
+  }
+}

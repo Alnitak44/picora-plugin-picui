@@ -1,0 +1,15 @@
+{
+  "packageVersion": 1,
+  "runtime": "http-v2",
+  "entry": "uploader.json",
+  "id": "io.github.alnitak44.picora.picui",
+  "name": "PICUI 图床",
+  "version": "1.0.1",
+  "description": "支持游客上传，也可使用个人 Token 上传到 PICUI 账户。",
+  "author": "Alnitak44",
+  "homepage": "https://picui.cn/",
+  "repository": "https://github.com/Alnitak44/picora-plugin-picui",
+  "icon": "assets/icon.png",
+  "mark": "PIC",
+  "color": "#4975D4"
+}
